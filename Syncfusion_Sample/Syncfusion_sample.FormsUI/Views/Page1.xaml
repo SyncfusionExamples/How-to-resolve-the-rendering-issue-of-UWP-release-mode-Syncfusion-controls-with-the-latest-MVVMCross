@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage 
+             x:TypeArguments="bas:Page1ViewModel"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:bas="clr-namespace:Syncfusion_Sample.Core.ViewModels;assembly=Syncfusion_Sample.Core"
+             xmlns:viewModels="clr-namespace:Syncfusion_Sample.Core.ViewModels;assembly=Syncfusion_Sample.Core"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+             mc:Ignorable="d"
+             x:Class="Syncfusion_Sample.FormsUI.Views.Page1"
+            Title="Page 1">
+    <ContentPage.Content>
+        <Grid>
+           
+
+            <!--Chart-->
+            <chart:SfChart Margin="4,2" HeightRequest="300">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis />
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis/>
+                </chart:SfChart.SecondaryAxis>
+
+
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend />
+                </chart:SfChart.Legend>
+
+
+                <chart:SfChart.Series>
+                    <chart:ColumnSeries Label="Income" EnableAnimation="False" x:Name="incomeSerie" 
+                                         DataMarkerPosition="Top" XBindingPath="XValue" YBindingPath="YValue"
+                                         ItemsSource ="{Binding NewsCollection}">
+                    </chart:ColumnSeries>
+                  
+                </chart:SfChart.Series>
+            </chart:SfChart>
+
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>
