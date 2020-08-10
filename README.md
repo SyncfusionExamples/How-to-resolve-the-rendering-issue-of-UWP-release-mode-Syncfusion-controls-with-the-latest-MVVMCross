@@ -1,8 +1,8 @@
-# How-to-render-the-chart-control-in-UWP-with-release-mode-in-MVVMCross-6.1.2
+# How to resolve the rendering issue of UWP release mode Syncfusion controls with the latest MVVMCross version
 
 This sample explains about How to render the chart controls in UWP with release mode in MVVMCross 6.1.2 and above.
 
-To render the Syncfusion control in release mode of UWP need some additional step like to add its renderer as mentioned in below
+To render the Syncfusion control in release mode of UWP, need some additional step like to add its renderer as mentioned in below
 
 https://help.syncfusion.com/xamarin/charts/getting-started#universal-windows-platform-uwp
 
@@ -10,10 +10,9 @@ In MVVMCross version 6.12 and above, even we have added those will not render th
 
 The below UI with MVVMCross application in debug mode
 
- ![](debug.png)
+ ![](release.png)
 
 But in release mode, it will be rendered with empty screen even with adding its renderer as below
-
 ```
 sealed partial class App
     {
@@ -32,7 +31,10 @@ sealed partial class App
         }
     }
 ```
-To resolve it, please change the below  
+## How to resolve this issue
+It has been resolved by changing the MvxFormsWindowsSetup<Core.App, FormsUI.App> with MVVMCrossSetup as shown in below
+
+**Before code changes:**
 
 ```
 public abstract class UWPApplication : MvxWindowsApplication<MvxFormsWindowsSetup<Core.App, FormsUI.App>, Core.App, FormsUI.App, MainPage>
@@ -40,27 +42,29 @@ public abstract class UWPApplication : MvxWindowsApplication<MvxFormsWindowsSetu
 
     }
 ```
-into 
+
+**After code changes:**
 
 ```
-public abstract class UWPApplication : MvxWindowsApplication<Setup, Core.App, FormsUI.App, MainPage>
+public abstract class UWPApplication : MvxWindowsApplication<MVVMCrossSetup, Core.App, FormsUI.App, MainPage>
     {
 
     }
 
-    public class Setup : MvxFormsWindowsSetup<Core.App, FormsUI.App>
+    public class MVVMCrossSetup : MvxFormsWindowsSetup<Core.App, FormsUI.App>
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
-                var customAssemblies = new List<Assembly>()
+            var syncfusionChartRendererAssembly = new List<Assembly>()
                 {
                     typeof(Syncfusion.SfChart.XForms.UWP.SfChartRenderer).GetTypeInfo().Assembly
                 };
-                customAssemblies.AddRange(base.GetViewAssemblies());
-                return customAssemblies;
+            syncfusionChartRendererAssembly.AddRange(base.GetViewAssemblies());
+            return syncfusionChartRendererAssembly;
         }
     }
 ```
+
 ![](release.png)
  
 
