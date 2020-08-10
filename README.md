@@ -10,7 +10,7 @@ In MVVMCross version 6.12 and above, even we have added those will not render th
 
 The below UI with MVVMCross application in debug mode
 
- ![](release.png)
+ ![](debug.png)
 
 But in release mode, it will be rendered with empty screen even with adding its renderer as below
 ```
