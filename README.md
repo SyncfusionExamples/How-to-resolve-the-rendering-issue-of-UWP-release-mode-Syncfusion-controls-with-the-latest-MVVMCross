@@ -67,4 +67,4 @@ public abstract class UWPApplication : MvxWindowsApplication<MVVMCrossSetup, Cor
 
 ![](release.png)
  
-
+KB article - [How to resolve the rendering issue with Syncfusion controls using the latest MVVMCross](https://www.syncfusion.com/kb/11872/how-to-resolve-the-rendering-issue-with-syncfusion-controls-using-the-latest-mvvmcross)
